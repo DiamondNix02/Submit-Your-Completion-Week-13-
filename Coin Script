@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Coin : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        transform.position = new Vector3(Random.Range(-9f, 9f), Random.Range(-5f, 5f), 0);
+        float randomValue = Random.Range(0.2f, 1f);
+        Destroy(this.gameObject, 3f);
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D whatDidIHit)
+    {
+        if (whatDidIHit.tag == "Player")
+        {
+            GameObject.Find("GameManager").GetComponent<GameManager>().EarnScore(1);
+            Destroy(this.gameObject);
+        }
+    }
+}
